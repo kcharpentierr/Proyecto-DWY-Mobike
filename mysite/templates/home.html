@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<!-- home.html -->
+{% block title %}Home Page{% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+    <h2>Página principal</h2>
+    <div class="column">
+    <p>Usa MoBike para el desplazamiento en la comuna de La Reina </p>
+    <p>Busca los aparcamientos y activa tu servicio ecológico!</p>
+    </div>
+    {% if user.is_authenticated %}
+    <div >
+        <p>Your name is - {{user.first_name}} {{user.last_name}}</p>
+    <p>Your email is - {{user.email}}</p>
+    </div>
+    {% else %}
+
+    {% endif %}
+</div>
+{% endblock content %}
