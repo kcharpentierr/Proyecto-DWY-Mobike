@@ -9,5 +9,4 @@ urlpatterns = [
     path('crear_ejecutivo/', EjecutivoCreate.as_view(), name="ejecutivo_form"),
     path('editar_ejecutivo/<int:pk>', EjecutivoUpdate.as_view(), name="ejecutivo_update"),
     path('borrar_ejecutivo/<int:pk>', EjecutivoDelete.as_view(), name="ejecutivo_borrar"),
-    
 ]
