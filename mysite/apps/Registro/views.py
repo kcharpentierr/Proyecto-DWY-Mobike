@@ -185,7 +185,6 @@ class BicicletaDelete(DeleteView):
 
 # filtros
 
-
 def ListPortico(request):
     lista = Portico.objects.all()
     ubicacion = request.GET.get('ubicacion')
