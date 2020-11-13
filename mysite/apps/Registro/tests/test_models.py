@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.template.defaultfilters import slugify
-from Registro.models import Portico, Bicicleta
-from Registro.forms import Portico, Bicicleta
+from apps.Registro.models import Portico
+from apps.Registro.forms import Portico
 
 class PorticoTestCase(TestCase):
     def setUp(self):
