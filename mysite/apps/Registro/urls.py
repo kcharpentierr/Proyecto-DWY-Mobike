@@ -49,4 +49,9 @@ urlpatterns = [
     
     # listar con filtros
     path('listar_porticos', views.ListPortico , name="list_portico"), 
+
+    # api
+    path('porticos/',  views.portico_collection , name='portico_collection'),
+    path('porticos/<int:pk>/', views.portico_element ,name='portico_element')
+
 ]

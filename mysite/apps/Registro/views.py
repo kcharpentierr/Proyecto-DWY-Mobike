@@ -5,6 +5,17 @@ from .forms import porticoForm, bicicletaForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 
+# ------------- importaciones API ---------------------
+from django.http import HttpResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import PorticoSerializer
+from django.shortcuts import render, redirect, get_object_or_404
+from rest_framework import status
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser
+
+
 # listar porticos y bicicletas
 
 
@@ -185,6 +196,7 @@ class BicicletaDelete(DeleteView):
 
 # filtros
 
+
 def ListPortico(request):
     lista = Portico.objects.all()
     ubicacion = request.GET.get('ubicacion')
@@ -205,3 +217,38 @@ def ListPortico(request):
         'object_list': lista
     }
     return render(request, 'Registro/listar_porticos_filtros.html', data)
+
+
+@api_view(['GET', 'POST'])
+def portico_collection(request):
+    if request.method == 'GET':
+        porticos = Portico.objects.all()
+        serializer = PorticoSerializer(porticos, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = PorticoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            # Si el proceso de deserialización funciona, devolvemos una respuesta con un código 201 (creado
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # si falla el proceso de deserialización, devolvemos una respuesta 400
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def portico_element(request, pk):
+    portico = get_object_or_404(Portico, id_portico=pk)
+
+    if request.method == 'GET':
+        serializer = PorticoSerializer(portico)
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        portico.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'PUT':
+        portico_new = JSONParser().parse(request)
+        serializer = PorticoSerializer(portico, data=portico_new)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
