@@ -3,7 +3,7 @@ html,body {
 }
 
 body.my-login-page {
-	background-color: #f1e0c6;
+	background-color: #e3edfc;
 	font-size: 14px;
 }
 
@@ -47,8 +47,8 @@ body.my-login-page {
 	text-align: center;
 }
 #boton {
-	background-color: orange;
-	border-color: orange;
+	background-color: blue;
+	border-color:blue);
 }
 
 #logotipo {
