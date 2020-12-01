@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'apps.Usuario',
     'apps.Ejecutivo',
     'rest_framework',
+    'social_django', # login 2 grado
+    'social.apps.django_app.default',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware', # login 2 grado
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -67,10 +71,31 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+                'social.backends.facebook.FacebookAppOAuth2',
+                'social.backends.facebook.FacebookOAuth2',
+                'django.contrib.auth.backends.ModelBackend',
+                'social_core.backends.facebook.FacebookOAuth2',
+                'social_core.backends.google.GoogleOAuth2',
+]
+
+
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '176164250612583'
+SOCIAL_AUTH_FACEBOOK_SECRET = '9bf8601d8fe4a27deced7511440ba0c7'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '372748402042-pgjigh2rig5qc3us3mqb11lqmh6jo92d.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'VEeDRt3QAUrlp9AqxbYCiN2J'
 
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
@@ -137,3 +162,21 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'mobike.chile.duoc@gmail.com'
 EMAIL_HOST_PASSWORD = 'mobike123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# PWA
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')
+PWA_APP_NAME = 'Mobike'
+PWA_APP_DESCRIPTION = 'Mobike Web App'
+PWA_APP_THEME_COLOR = '#ffffff'
+PWA_APP_BACKGROUND_COLOR = '#fff'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/img/icono.png',
+        'sizes': '128x128'
+    },
+    {
+        'src': '/static/img/icono.png',
+        'sizes': '256x256'
+    }
+]
+
