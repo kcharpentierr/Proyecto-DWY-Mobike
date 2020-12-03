@@ -2,7 +2,7 @@
 Push.create("Mobike App Web", {
 
     //Texto del cuerpo de la notificación
-    body: "Leonardo Farkas se culió a Daniela Chavez",
+    body: "Bienvenido a Mobike, Activa las notificaciones para estar al dia con nuestras actualizaciones",
 
     icon: "../img/Logotipo.png", //Icono de la notificación
     timeout: 6000, //Tiempo de duración de la notificación
