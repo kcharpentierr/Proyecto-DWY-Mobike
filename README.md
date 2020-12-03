@@ -6,4 +6,4 @@ Integrantes: - Katherine Charpentier
 Sección: 006D
 
 Credenciales: Usuario: admin - Contraseña: admin
-              Usuario: dominique - Contraseña: cesarluna
+              Usuario: arvargas - Contraseña: mobike2020
